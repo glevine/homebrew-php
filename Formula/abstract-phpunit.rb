@@ -2,6 +2,8 @@
 
 require 'formula'
 require File.join(File.dirname(__FILE__), 'abstract-phpunit-version')
+require File.expand_path("../../Requirements/php-meta-requirement", __FILE__)
+require File.expand_path("../../Requirements/phar-requirement", __FILE__)
 
 class AbstractPhpunit < Formula
   def initialize name="__UNKNOWN__", *args
@@ -26,19 +28,19 @@ class AbstractPhpunit < Formula
     end
   end
 
-  def init
-    @homepage = PHPUNIT_HOME
-    @url = PHPUNIT_PHAR
-    @sha1 = PHPUNIT_SHA1
-    @version = PHPUNIT_VERSION
-  end
-
   def install
-    command = @version.delete "."
-    libexec.install "phpunit-#{version}.phar"
-    sh = libexec + "phpunit#{command}"
+    libexec.install "phpunit-#{version.to_s}.phar"
+    sh = libexec + command
     sh.write("#!/usr/bin/env bash\n\n/usr/bin/env php -d allow_url_fopen=On -d detect_unicode=Off #{libexec}/phpunit-#{version}.phar $*")
     chmod 0755, sh
     bin.install_symlink sh
+  end
+
+  def command
+    semver = {:major => 0, :minor => 0}
+    v = version.to_s.split "."
+    semver[:major] = v[0] unless v[0].nil?
+    semver[:minor] = v[1] unless v[1].nil?
+    "phpunit#{semver.values.join}"
   end
 end
