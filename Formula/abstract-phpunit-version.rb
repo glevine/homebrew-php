@@ -1,4 +1,4 @@
-class AbstractPhpunitVersion < AbstractPhpunit
+class AbstractPhpunitVersion < Formula
   def initialize name="__UNKNOWN__", *args
     begin
       raise "One does not simply install an AbstractPhpunit formula" if name == "abstract-phpunit-version"
@@ -22,20 +22,23 @@ class AbstractPhpunitVersion < AbstractPhpunit
   end
 
   module PhpUnit37Defs
-    homepage 'http://phpunit.de/manual/3.7/en/'
-    url 'https://phar.phpunit.de/phpunit-3.7.37.phar'
-    sha1 '6eee1c707a3511a9326cb545a569e6870e116820'
+    PHPUNIT_HOME = 'http://phpunit.de/manual/3.7/en/'
+    PHPUNIT_PHAR = 'https://phar.phpunit.de/phpunit-3.7.37.phar'
+    PHPUNIT_SHA1 = '6eee1c707a3511a9326cb545a569e6870e116820'
+    PHPUNIT_VERSION = '3.7'
   end
 
   module PhpUnit40Defs
-    homepage 'http://phpunit.de/manual/4.0/en/'
-    url 'https://phar.phpunit.de/phpunit-4.0.20.phar'
-    sha1 'a2642f82d66c858077530d6fc5fbe1710c685003'
+    PHPUNIT_HOME = 'http://phpunit.de/manual/4.0/en/'
+    PHPUNIT_PHAR = 'https://phar.phpunit.de/phpunit-4.0.20.phar'
+    PHPUNIT_SHA1 = 'a2642f82d66c858077530d6fc5fbe1710c685003'
+    PHPUNIT_VERSION = '4.0'
   end
 
   module PhpUnit41Defs
-    homepage 'http://phpunit.de/manual/4.1/en/'
-    url 'https://phar.phpunit.de/phpunit-4.1.3.phar'
-    sha1 '3975a93e0b3bdc0a7b61be2f36f50ee5c7d26c1d'
+    PHPUNIT_HOME = 'http://phpunit.de/manual/4.1/en/'
+    PHPUNIT_PHAR = 'https://phar.phpunit.de/phpunit-4.1.3.phar'
+    PHPUNIT_SHA1 = '3975a93e0b3bdc0a7b61be2f36f50ee5c7d26c1d'
+    PHPUNIT_VERSION = '4.1'
   end
 end

@@ -26,20 +26,17 @@ class AbstractPhpunit < Formula
     end
   end
 
-  def phpunit_version
-    raise "Unspecified phpunit version"
-  end
-
-  def php_version_path
-    raise "Unspecified php version path"
+  def init
+    @homepage = PHPUNIT_HOME
+    @url = PHPUNIT_PHAR
+    @sha1 = PHPUNIT_SHA1
+    @version = PHPUNIT_VERSION
   end
 
   def install
-    # Ensure this php has a version specified
-    php_version
-    php_version_path
+    command = @version.delete "."
     libexec.install "phpunit-#{version}.phar"
-    sh = libexec + "phpunit#{phpunit_version_path.to_s}"
+    sh = libexec + "phpunit#{command}"
     sh.write("#!/usr/bin/env bash\n\n/usr/bin/env php -d allow_url_fopen=On -d detect_unicode=Off #{libexec}/phpunit-#{version}.phar $*")
     chmod 0755, sh
     bin.install_symlink sh
